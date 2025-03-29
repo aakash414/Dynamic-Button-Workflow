@@ -29,7 +29,7 @@ export function Output() {
       case "Show Text": {
         const textElement = document.createElement("div");
         textElement.className =
-          "mt-4 p-3 bg-gray-100 rounded-md text-black w-auto";
+          "mt-4 p-3   rounded-md text-black w-auto";
         textElement.textContent = action.param;
         document.getElementById("outputContainer").appendChild(textElement);
         break;
@@ -59,7 +59,7 @@ export function Output() {
         try {
           const value = localStorage.getItem(action.param);
           const resultElement = document.createElement("div");
-          resultElement.className = "mt-4 p-3 bg-gray-100 rounded-md";
+          resultElement.className = "mt-4 p-3  rounded-md";
           resultElement.textContent = `${action.param}: ${
             value || "Not found"
           }`;
@@ -90,7 +90,7 @@ export function Output() {
         const userInput = prompt(action.param);
         if (userInput !== null) {
           const promptResult = document.createElement("div");
-          promptResult.className = "mt-4 p-3 bg-gray-100 rounded-md";
+          promptResult.className = "mt-4 p-3   rounded-md";
           promptResult.textContent = `You entered: ${userInput}`;
           document.getElementById("outputContainer").appendChild(promptResult);
         }
