@@ -92,16 +92,16 @@ export function Config() {
               type="text"
               value={buttonLabel}
               onChange={(e) => setButtonLabel(e.target.value)}
-              className="w-auto px-4 py-2 border  rounded-md  "
+              className="w-full px-4 py-2 border rounded-md"
             />
           </div>
-          <div className="flex  flex-col">
+          <div className="flex flex-col gap-4">
             <div>
               <label>Select Action:</label>
               <select
                 value={selectedAction}
                 onChange={(e) => setSelectedAction(e.target.value)}
-                className="w-auto px-4 py-2 border  rounded-md"
+                className="w-full px-4 py-2 border rounded-md"
               >
                 {[
                   "Alert",
@@ -125,7 +125,7 @@ export function Config() {
             {actionRequiresParam() && (
               <>
                 <div>
-                  <label className="w-1/2 text-sm font-lg mb-1">
+                  <label className="block text-sm font-medium mb-1">
                     {paramLabel}
                   </label>
                   <input
@@ -133,7 +133,7 @@ export function Config() {
                     value={actionParam}
                     onChange={(e) => setActionParam(e.target.value)}
                     placeholder={paramPlaceholder}
-                    className="w-1/2 px-4 py-2 border rounded-md "
+                    className="w-full px-4 py-2 border rounded-md"
                   />
                 </div>
               </>
