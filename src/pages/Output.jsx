@@ -6,11 +6,11 @@ export function Output() {
 
   useEffect(() => {
     const savedConfig = localStorage.getItem("buttonConfig");
-    console.log(savedConfig, "savedConfig");
+    // console.log(savedConfig, "savedConfig");
     if (savedConfig) {
       setConfig(JSON.parse(savedConfig));
     }
-    console.log(config, "config after everything o/p");
+    // console.log(config, "config after everything o/p");
   }, [config]);
 
   const executeActions = async () => {
@@ -28,7 +28,8 @@ export function Output() {
         break;
       case "Show Text": {
         const textElement = document.createElement("div");
-        textElement.className = "mt-4 p-3 bg-gray-100 rounded-md";
+        textElement.className =
+          "mt-4 p-3 bg-gray-100 rounded-md text-black w-auto";
         textElement.textContent = action.param;
         document.getElementById("outputContainer").appendChild(textElement);
         break;
@@ -114,21 +115,28 @@ export function Output() {
   };
 
   return (
-    <div>
-      <h1>Output Page</h1>
-
-      {config ? (
+    <div className="min-h-screen relative">
+      <div className="max-w-4xl mx-auto p-6">
+        <h1 className="text-3xl font-bold">Output Page</h1>
         <div>
-          <button ref={setButtonRef} onClick={executeActions}>
-            {config.buttonLabel ? config.buttonLabel : "start"}
-          </button>
-          <div id="outputContainer"></div>
+          {config ? (
+            <div>
+              <button ref={setButtonRef} onClick={executeActions}>
+                {config.buttonLabel ? config.buttonLabel : "start"}
+              </button>
+              <div id="outputContainer"></div>
+            </div>
+          ) : (
+            <div>No button configuration found.</div>
+          )}
         </div>
-      ) : (
-        <div>No button configuration found.</div>
-      )}
-
-      <a href="/">Back to Configuration</a>
+      </div>
+      <button
+        className="fixed bottom-6 right-6 px-6 py-2  rounded-md"
+        onClick={() => (window.location.href = "/")}
+      >
+        Back to Configuration
+      </button>
     </div>
   );
 }
