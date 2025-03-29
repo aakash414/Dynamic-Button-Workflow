@@ -50,6 +50,28 @@ export function Config() {
     setActions(actions.filter((action) => action.id !== id));
   };
 
+  const moveActionUp = (index) => {
+    if (index === 0) return;
+
+    const newActions = [...actions];
+    const temp = newActions[index];
+    newActions[index] = newActions[index - 1];
+    newActions[index - 1] = temp;
+
+    setActions(newActions);
+  };
+
+  const moveActionDown = (index) => {
+    if (index === actions.length - 1) return;
+
+    const newActions = [...actions];
+    const temp = newActions[index];
+    newActions[index] = newActions[index + 1];
+    newActions[index + 1] = temp;
+
+    setActions(newActions);
+  };
+
   const saveConfiguration = () => {
     localStorage.setItem(
       "buttonConfig",
@@ -57,7 +79,6 @@ export function Config() {
     );
     window.location.href = "/output";
   };
-  console.log(actions.length, "action length");
 
   return (
     <div className="flex flex-col w-full h-full ">
@@ -146,26 +167,35 @@ export function Config() {
                       </span>
                     )}
                   </div>
-                  <button
-                    onClick={() => removeAction(action.id)}
-                    className="text-red-500 hover:text-red-700"
-                    aria-label="Remove action"
-                  >
-                    Delete
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => moveActionUp(index)}
+                      disabled={index === 0}
+                      className="px-2 py-1"
+                    >
+                      ↑
+                    </button>
+                    <button
+                      onClick={() => moveActionDown(index)}
+                      disabled={index === actions.length - 1}
+                      className="px-2 py-1"
+                      aria-label="Move action down"
+                    >
+                      ↓
+                    </button>
+                    <button
+                      onClick={() => removeAction(action.id)}
+                      className="px-2 py-1 text-red-500 hover:text-red-700"
+                      aria-label="Remove action"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
           )}
         </div>
-        {/* <ul>
-          {actions.map((action) => (
-            <li key={action.id}>
-              {action.type} {action.param && `- ${action.param}`}
-              <button onClick={() => removeAction(action.id)}>Remove</button>
-            </li>
-          ))}
-        </ul> */}
         <div style={{ display: "flex", gap: "10px" }}>
           <button onClick={saveConfiguration}>Save & Go to Output</button>
         </div>
