@@ -6,12 +6,10 @@ export function Output() {
 
   useEffect(() => {
     const savedConfig = localStorage.getItem("buttonConfig");
-    // console.log(savedConfig, "savedConfig");
     if (savedConfig) {
       setConfig(JSON.parse(savedConfig));
     }
-    // console.log(config, "config after everything o/p");
-  }, [config]);
+  }, []);
 
   const executeActions = async () => {
     if (!config || !config.actions || !config.actions.length) return;
@@ -28,8 +26,7 @@ export function Output() {
         break;
       case "Show Text": {
         const textElement = document.createElement("div");
-        textElement.className =
-          "mt-4 p-3   rounded-md text-black w-auto";
+        textElement.className = "mt-4 p-3   rounded-md text-black w-auto";
         textElement.textContent = action.param;
         document.getElementById("outputContainer").appendChild(textElement);
         break;
